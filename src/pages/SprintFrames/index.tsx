@@ -33,7 +33,7 @@ export default function SprintFrame() {
                         <Typography variant="h4" gutterBottom style={{ marginTop: 8 }}>
                             Quadros
                         </Typography>
-                        <IconButton aria-label="add">
+                        <IconButton aria-label="add" style={{ alignSelf: "flex-end", flexDirection: "column" }}>
                             <AddBoxIcon fontSize="large" />
                         </IconButton>
                     </Paper>
@@ -45,15 +45,122 @@ export default function SprintFrame() {
                             alignItems: "flex-start",
                             display: "flex",
                             marginBottom: 15,
-                            backgroundColor: "#E6E8FA",
+                            backgroundColor: "#DCDCDC",
                         }}
                     >
-                        <TextField
-                            id="outlined-basic"
-                            label="Projetos"
-                            variant="outlined"
-                            style={{ width: "80%", alignContent: "flex-start", display: "flex" }}
-                        />
+                        <Grid
+                            item
+                            xs={3}
+                            style={{
+                                flexDirection: "column",
+                                display: "flex",
+                                alignItems: "stretch",
+                                minWidth: 140,
+                                marginTop: 36,
+                            }}
+                        >
+                            <Paper
+                                className={classes.paper}
+                                style={{
+                                    alignItems: "stretch",
+                                    display: "flex",
+                                    marginBottom: 15,
+                                    marginRight: 20,
+                                    backgroundColor: "#F5F5F5",
+                                    alignSelf: "stretch",
+                                    flexDirection: "column",
+                                }}
+                            >
+                                {" "}
+                                <Paper
+                                    elevation={0}
+                                    style={{
+                                        display: "flex",
+                                        minWidth: 120,
+                                        minHeight: 100,
+                                        backgroundColor: "#FFFFFF",
+                                    }}
+                                />
+                                <IconButton aria-label="add" style={{ alignSelf: "flex-end", flexDirection: "column" }}>
+                                    <AddBoxIcon fontSize="large" />
+                                </IconButton>
+                            </Paper>
+                        </Grid>
+                        <Grid
+                            item
+                            xs={3}
+                            style={{ flexDirection: "column", display: "flex", alignItems: "stretch", minWidth: 140 }}
+                        >
+                            <Typography
+                                variant="h5"
+                                style={{ alignSelf: "flex-start", flexDirection: "column", marginBottom: 5 }}
+                            >
+                                Backlog
+                            </Typography>
+                            <Paper
+                                className={classes.paper}
+                                style={{
+                                    alignItems: "stretch",
+                                    display: "flex",
+                                    marginBottom: 15,
+                                    marginRight: 20,
+                                    backgroundColor: "#F5F5F5",
+                                    alignSelf: "stretch",
+                                    flexDirection: "column",
+                                }}
+                            >
+                                <Paper
+                                    elevation={0}
+                                    style={{
+                                        display: "flex",
+                                        minWidth: 120,
+                                        minHeight: 100,
+                                        backgroundColor: "#FFFFFF",
+                                    }}
+                                />
+                                <IconButton aria-label="add" style={{ alignSelf: "flex-end", flexDirection: "column" }}>
+                                    <AddBoxIcon fontSize="large" />
+                                </IconButton>
+                            </Paper>
+                        </Grid>
+                        <Grid
+                            item
+                            xs={3}
+                            style={{ flexDirection: "column", display: "flex", alignItems: "stretch", minWidth: 140 }}
+                        >
+                            <Typography
+                                variant="h5"
+                                style={{ alignSelf: "flex-start", flexDirection: "column", marginBottom: 5 }}
+                            >
+                                Doing
+                            </Typography>
+                            <Paper
+                                className={classes.paper}
+                                style={{
+                                    alignItems: "stretch",
+                                    display: "flex",
+                                    marginBottom: 15,
+                                    marginRight: 20,
+                                    backgroundColor: "#F5F5F5",
+                                    alignSelf: "stretch",
+                                    flexDirection: "column",
+                                }}
+                            >
+                                {" "}
+                                <Paper
+                                    elevation={0}
+                                    style={{
+                                        display: "flex",
+                                        minWidth: 120,
+                                        minHeight: 100,
+                                        backgroundColor: "#FFFFFF",
+                                    }}
+                                />
+                                <IconButton aria-label="add" style={{ alignSelf: "flex-end", flexDirection: "column" }}>
+                                    <AddBoxIcon fontSize="large" />
+                                </IconButton>
+                            </Paper>
+                        </Grid>
                     </Paper>
                 </Grid>
             </Grid>
