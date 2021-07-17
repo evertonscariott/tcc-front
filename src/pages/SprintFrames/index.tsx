@@ -1,10 +1,23 @@
 import React from "react";
-import { Grid, TextField, Paper, Button, Typography, IconButton } from "@material-ui/core/";
+import {
+    Grid,
+    TextField,
+    Paper,
+    Button,
+    Typography,
+    IconButton,
+    Divider,
+    List,
+    ListItemText,
+    ListSubheader,
+} from "@material-ui/core/";
+import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import Menu from "../../components/Menu";
 import CardProjeto from "../../components/CardProjeto";
+import { BorderAll } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -19,8 +32,13 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
+function ListItemLink(props: ListItemProps<"a", { button?: true }>) {
+    return <ListItem button component="a" {...props} />;
+}
+
 export default function SprintFrame() {
     const classes = useStyles();
+
     return (
         <>
             <Menu />
@@ -30,12 +48,34 @@ export default function SprintFrame() {
                         className={classes.paper}
                         style={{ alignItems: "flex-start", display: "flex", marginBottom: 15 }}
                     >
-                        <Typography variant="h4" gutterBottom style={{ marginTop: 8 }}>
-                            Quadros
-                        </Typography>
-                        <IconButton aria-label="add" style={{ alignSelf: "flex-end", flexDirection: "column" }}>
-                            <AddBoxIcon fontSize="large" />
-                        </IconButton>
+                        <List
+                            component="nav"
+                            aria-labelledby="nested-list-subheader"
+                            subheader={
+                                <ListSubheader component="div" id="nested-list-subheader">
+                                    <Paper style={{ alignItems: "flex-start", display: "flex" }}>
+                                        <Typography variant="h4" gutterBottom style={{ marginTop: 8 }}>
+                                            Quadros
+                                        </Typography>
+                                        <IconButton
+                                            aria-label="add"
+                                            style={{ alignSelf: "flex-end", flexDirection: "column" }}
+                                        >
+                                            <AddBoxIcon fontSize="large" />
+                                        </IconButton>
+                                    </Paper>
+                                </ListSubheader>
+                            }
+                            className={classes.root}
+                        >
+                            <Divider />
+                            <ListItem button>
+                                <ListItemText primary="Trash" />
+                            </ListItem>
+                            <ListItemLink href="#simple-list">
+                                <ListItemText primary="Spam" />
+                            </ListItemLink>
+                        </List>
                     </Paper>
                 </Grid>
                 <Grid item xs={9}>
@@ -66,7 +106,7 @@ export default function SprintFrame() {
                                     display: "flex",
                                     marginBottom: 15,
                                     marginRight: 20,
-                                    backgroundColor: "#F5F5F5",
+                                    backgroundColor: "#C0C0C0",
                                     alignSelf: "stretch",
                                     flexDirection: "column",
                                 }}
@@ -84,6 +124,7 @@ export default function SprintFrame() {
                                 <IconButton aria-label="add" style={{ alignSelf: "flex-end", flexDirection: "column" }}>
                                     <AddBoxIcon fontSize="large" />
                                 </IconButton>
+                                <hr style={{ height: 3, width: "470%", zIndex: 10 }} />
                             </Paper>
                         </Grid>
                         <Grid
@@ -104,7 +145,7 @@ export default function SprintFrame() {
                                     display: "flex",
                                     marginBottom: 15,
                                     marginRight: 20,
-                                    backgroundColor: "#F5F5F5",
+                                    backgroundColor: "#C0C0C0",
                                     alignSelf: "stretch",
                                     flexDirection: "column",
                                 }}
@@ -141,7 +182,7 @@ export default function SprintFrame() {
                                     display: "flex",
                                     marginBottom: 15,
                                     marginRight: 20,
-                                    backgroundColor: "#F5F5F5",
+                                    backgroundColor: "#C0C0C0",
                                     alignSelf: "stretch",
                                     flexDirection: "column",
                                 }}
