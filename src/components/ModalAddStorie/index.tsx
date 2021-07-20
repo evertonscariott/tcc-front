@@ -4,11 +4,15 @@ import "date-fns";
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import DateFnsUtils from "@date-io/date-fns";
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from "@material-ui/pickers";
+
+import Swal from "sweetalert2";
+
+import api from "../../services/api/api.config";
 
 import StorieDto from "../../infrastructure/dtos/storie.dto";
 import { Button, CircularProgress, Grid, Paper, TextField } from "@material-ui/core";
+import { add } from "date-fns";
+import { postFrame } from "../../services/api/resource/frame";
 
 type props = {
     openModalAddStorie: boolean;
@@ -41,8 +45,32 @@ export default function AddFrame({ openModalAddStorie, handleCloseModalAddStorie
 
     const [selectedDate, setSelectedDate] = React.useState<Date | null>(new Date("2014-08-18T21:11:54"));
 
-    const handleDateChange = (date: Date | null) => {
-        setSelectedDate(date);
+    const [addStorie, setAddStorie] = useState<typeof AddStorie>({
+        name: "",
+        descricao: "",
+        data_inicio: new Date(),
+        data_fim: new Date(),
+    });
+
+    const postStorie = async () => {
+        try {
+            const params = {
+                name: addStorie.name,
+                situacao: addStorie.descricao,
+                data_inicio: addStorie.data_inicio,
+                data_fim: addStorie.data_fim,
+            };
+
+            const { data } = await api.post(`/api/v1/historia`, { params });
+
+            console.log(data);
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Erro!",
+                text: "Erro ao salvar história.",
+            });
+        }
     };
 
     return (
@@ -60,10 +88,9 @@ export default function AddFrame({ openModalAddStorie, handleCloseModalAddStorie
                             <Grid item xs={12}>
                                 <TextField
                                     name="name"
-                                    label="Nome do quadro"
-                                    value="Nome do Quadro"
-                                    //onChange={(e) => setPlaceName(e.target.value)}
-                                    variant="outlined"
+                                    label="Nome do história"
+                                    value={addStorie.name}
+                                    onChange={(e: any) => setAddStorie(e.target.value)}
                                     fullWidth
                                 />
                             </Grid>
@@ -71,9 +98,8 @@ export default function AddFrame({ openModalAddStorie, handleCloseModalAddStorie
                                 <TextField
                                     name="descricao"
                                     label="Descrição"
-                                    value="Descrição"
-                                    //onChange={(e) => setPlaceName(e.target.value)}
-                                    variant="outlined"
+                                    value={addStorie.descricao}
+                                    onChange={(e: any) => setAddStorie(e.target.value)}
                                     fullWidth
                                 />
                             </Grid>
@@ -85,8 +111,8 @@ export default function AddFrame({ openModalAddStorie, handleCloseModalAddStorie
                                         margin="normal"
                                         id="date-picker-inline"
                                         label="Date Início"
-                                        value={selectedDate}
-                                        //onChange={handleDateChange}
+                                        value={addStorie.data_inicio}
+                                        onChange={(e: any) => setAddStorie(e.target.value)}
                                     />
                                     <TextField
                                         name="data_fim"
@@ -94,14 +120,14 @@ export default function AddFrame({ openModalAddStorie, handleCloseModalAddStorie
                                         margin="normal"
                                         id="date-picker-inline"
                                         label="Date Final"
-                                        value={selectedDate}
-                                        //onChange={handleDateChange}
+                                        value={addStorie.data_fim}
+                                        onChange={(e: any) => setAddStorie(e.target.value)}
                                     />
                                 </Grid>
                             </Grid>
                             <Grid item style={{ textAlign: "center" }} xs={12}>
                                 <Button
-                                    onClick={() => handleCloseModalAddStorie}
+                                    onClick={() => postStorie}
                                     style={{ margin: "8px", backgroundColor: "#1769aa", width: 120 }}
                                 >
                                     Salvar

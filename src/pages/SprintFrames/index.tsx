@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import {
     Grid,
     TextField,
@@ -17,6 +18,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import Menu from "../../components/Menu";
 import CardProjeto from "../../components/CardProjeto";
+import api from "../../services/api/api.config";
 import { BorderAll } from "@material-ui/icons";
 
 import AddFrame from "../../components/ModalAddFrame";
@@ -74,6 +76,7 @@ const SprintFrame: React.FC<props> = ({ frame, storie, task }) => {
     const handleCloseModalAddTask = () => {
         setOpenModalAddTask(false);
     };
+
     return (
         <>
             <Menu />
@@ -93,7 +96,11 @@ const SprintFrame: React.FC<props> = ({ frame, storie, task }) => {
                     handleCloseModalAddTask={handleCloseModalAddTask}
                     AddTask={task}
                 />
-                <Grid container spacing={5} style={{ padding: 15, display: "flex", alignItems: "center" }}>
+                <Grid
+                    container
+                    spacing={5}
+                    style={{ padding: 15, display: "flex", alignItems: "center", marginTop: 50 }}
+                >
                     <Grid item xs={3}>
                         <Paper
                             className={classes.paper}
@@ -111,7 +118,11 @@ const SprintFrame: React.FC<props> = ({ frame, storie, task }) => {
                                             <IconButton
                                                 onClick={handleModalAddFrame}
                                                 aria-label="add"
-                                                style={{ alignSelf: "flex-end", flexDirection: "column" }}
+                                                style={{
+                                                    alignSelf: "flex-end",
+                                                    flexDirection: "column",
+                                                    color: "#1769aa",
+                                                }}
                                             >
                                                 <AddBoxIcon fontSize="large" />
                                             </IconButton>
@@ -137,7 +148,7 @@ const SprintFrame: React.FC<props> = ({ frame, storie, task }) => {
                                 alignItems: "flex-start",
                                 display: "flex",
                                 marginBottom: 15,
-                                backgroundColor: "#DCDCDC",
+                                backgroundColor: "#C9C9C9",
                             }}
                         >
                             <Grid
@@ -158,7 +169,7 @@ const SprintFrame: React.FC<props> = ({ frame, storie, task }) => {
                                         display: "flex",
                                         marginBottom: 15,
                                         marginRight: 20,
-                                        backgroundColor: "#C0C0C0",
+                                        backgroundColor: "#DCDCDC",
                                         alignSelf: "stretch",
                                         flexDirection: "column",
                                     }}
@@ -175,7 +186,7 @@ const SprintFrame: React.FC<props> = ({ frame, storie, task }) => {
                                     />
                                     <IconButton
                                         aria-label="add"
-                                        style={{ alignSelf: "flex-end", flexDirection: "column" }}
+                                        style={{ alignSelf: "flex-end", flexDirection: "column", color: "#1769aa" }}
                                         onClick={handleModalAddStorie}
                                     >
                                         <AddBoxIcon fontSize="large" />
@@ -206,7 +217,7 @@ const SprintFrame: React.FC<props> = ({ frame, storie, task }) => {
                                         display: "flex",
                                         marginBottom: 15,
                                         marginRight: 20,
-                                        backgroundColor: "#C0C0C0",
+                                        backgroundColor: "#DCDCDC",
                                         alignSelf: "stretch",
                                         flexDirection: "column",
                                     }}
@@ -222,7 +233,7 @@ const SprintFrame: React.FC<props> = ({ frame, storie, task }) => {
                                     />
                                     <IconButton
                                         aria-label="add"
-                                        style={{ alignSelf: "flex-end", flexDirection: "column" }}
+                                        style={{ alignSelf: "flex-end", flexDirection: "column", color: "#1769aa" }}
                                         onClick={handleModalAddTask}
                                     >
                                         <AddBoxIcon fontSize="large" />
@@ -252,7 +263,7 @@ const SprintFrame: React.FC<props> = ({ frame, storie, task }) => {
                                         display: "flex",
                                         marginBottom: 15,
                                         marginRight: 20,
-                                        backgroundColor: "#C0C0C0",
+                                        backgroundColor: "#DCDCDC",
                                         alignSelf: "stretch",
                                         flexDirection: "column",
                                     }}
@@ -269,7 +280,7 @@ const SprintFrame: React.FC<props> = ({ frame, storie, task }) => {
                                     />
                                     <IconButton
                                         aria-label="add"
-                                        style={{ alignSelf: "flex-end", flexDirection: "column" }}
+                                        style={{ alignSelf: "flex-end", flexDirection: "column", color: "#1769aa" }}
                                         onClick={handleModalAddTask}
                                     >
                                         <AddBoxIcon fontSize="large" />

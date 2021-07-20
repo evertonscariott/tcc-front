@@ -3,7 +3,7 @@ export default class frameSharedResource {
 
     situacao: string;
 
-    id_projeto: number;
+    id_projeto?: number;
     constructor(name: string, situacao: string, id_projeto: number) {
         this.name = name;
         this.situacao = situacao;

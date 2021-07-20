@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 
+import Swal from "sweetalert2";
+
+import api from "../../services/api/api.config";
+
 import TaskDto from "../../infrastructure/dtos/task.dto";
 import { Button, CircularProgress, Grid, Paper, TextField } from "@material-ui/core";
+import { postFrame } from "../../services/api/resource/frame";
 
 type props = {
     openModalAddTask: boolean;
@@ -34,6 +39,34 @@ export default function AddFrame({ openModalAddTask, handleCloseModalAddTask, Ad
     const rootRef = React.useRef<HTMLDivElement>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
+    const [addTask, setAddTask] = useState<typeof AddTask>({
+        name: "",
+        descricao: "",
+        tempoEstimado: "",
+        tempoRealizado: "",
+    });
+
+    const postTask = async () => {
+        try {
+            const params = {
+                name: addTask.name,
+                descricao: addTask.descricao,
+                tempoEstimado: addTask.tempoEstimado,
+                tempoRealizado: addTask.tempoRealizado,
+            };
+
+            const { data } = await api.post(`/api/v1/tarefa`, { params });
+
+            console.log(data);
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Erro!",
+                text: "Erro ao salvar tarefa.",
+            });
+        }
+    };
+
     return (
         <div ref={rootRef}>
             <Modal
@@ -50,9 +83,8 @@ export default function AddFrame({ openModalAddTask, handleCloseModalAddTask, Ad
                                 <TextField
                                     name="name"
                                     label="Nome da Tarefa"
-                                    value="Nome da Tarefa"
-                                    //onChange={(e) => setPlaceName(e.target.value)}
-                                    variant="outlined"
+                                    value={addTask.name}
+                                    onChange={(e: any) => setAddTask(e.target.value)}
                                     fullWidth
                                 />
                             </Grid>
@@ -60,9 +92,8 @@ export default function AddFrame({ openModalAddTask, handleCloseModalAddTask, Ad
                                 <TextField
                                     name="descricao"
                                     label="Descrição"
-                                    value="Descrição"
-                                    //onChange={(e) => setPlaceAddress(e.target.value)}
-                                    variant="outlined"
+                                    value={addTask.descricao}
+                                    onChange={(e: any) => setAddTask(e.target.value)}
                                     fullWidth
                                 />
                             </Grid>
@@ -70,17 +101,15 @@ export default function AddFrame({ openModalAddTask, handleCloseModalAddTask, Ad
                                 <TextField
                                     name="tempoEstimado"
                                     label="Tempo Estimado"
-                                    value="Tempo Estimado"
-                                    //onChange={(e) => setPlaceAddress(e.target.value)}
-                                    variant="outlined"
+                                    value={addTask.tempoEstimado}
+                                    onChange={(e: any) => setAddTask(e.target.value)}
                                     fullWidth
                                 />
                                 <TextField
                                     name="tempoRealizado"
                                     label="Tempo Realizado"
-                                    value="Tempo Realizado"
-                                    //onChange={(e) => setPlaceAddress(e.target.value)}
-                                    variant="outlined"
+                                    value={addTask.tempoRealizado}
+                                    onChange={(e: any) => setAddTask(e.target.value)}
                                     fullWidth
                                 />
                             </Grid>
@@ -90,7 +119,6 @@ export default function AddFrame({ openModalAddTask, handleCloseModalAddTask, Ad
                                     label="Tipo de Tarefa"
                                     value="Tipo de Tarefa"
                                     //onChange={(e) => setPlaceAddress(e.target.value)}
-                                    variant="outlined"
                                     fullWidth
                                 />
                             </Grid>
@@ -100,13 +128,12 @@ export default function AddFrame({ openModalAddTask, handleCloseModalAddTask, Ad
                                     label="História"
                                     value="História"
                                     //onChange={(e) => setPlaceAddress(e.target.value)}
-                                    variant="outlined"
                                     fullWidth
                                 />
                             </Grid>
                             <Grid item style={{ textAlign: "center" }} xs={12}>
                                 <Button
-                                    onClick={() => handleCloseModalAddTask}
+                                    onClick={() => postFrame}
                                     style={{ margin: "8px", backgroundColor: "#1769aa", width: 120 }}
                                 >
                                     Salvar

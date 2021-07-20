@@ -3,11 +3,11 @@ export default class storieSharedResource {
 
     descricao: string;
 
-    data_inicio: Date;
+    data_inicio?: Date;
 
-    data_fim: Date;
+    data_fim?: Date;
 
-    id_quadro: number;
+    id_quadro?: number;
     constructor(name: string, descricao: string, data_inicio: Date, data_fim: Date, id_quadro: number) {
         this.name = name;
         this.descricao = descricao;

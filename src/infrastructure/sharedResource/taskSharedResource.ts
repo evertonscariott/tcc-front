@@ -7,13 +7,13 @@ export default class storieSharedResource {
 
     tempoRealizado: string;
 
-    tipoTarefaId: number;
+    tipoTarefaId?: number;
 
-    listaId: number;
+    listaId?: number;
 
-    historiaId: number;
+    historiaId?: number;
 
-    etiquetaIds: number[];
+    etiquetaIds?: number[];
     constructor(
         name: string,
         descricao: string,

@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 
+import Swal from "sweetalert2";
+
+import api from "../../services/api/api.config";
+
 import FrameDto from "../../infrastructure/dtos/frame.dto";
 import { Button, CircularProgress, Grid, Paper, TextField } from "@material-ui/core";
 
@@ -33,6 +37,29 @@ export default function AddFrame({ openModalAddFrame, handleCloseModalAddFrames,
     const classes = useStyles();
     const rootRef = React.useRef<HTMLDivElement>(null);
     const [loading, setLoading] = useState<boolean>(false);
+    const [addFrame, setAddFrame] = useState<typeof AddFrame>({
+        name: "",
+        situacao: "",
+    });
+
+    const postFrame = async () => {
+        try {
+            const params = {
+                name: addFrame.name,
+                situacao: addFrame.situacao,
+            };
+
+            const { data } = await api.post(`/api/v1/quadro`, { params });
+
+            console.log(data);
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Erro!",
+                text: "Erro ao salvar quadro.",
+            });
+        }
+    };
 
     return (
         <div ref={rootRef}>
@@ -50,9 +77,8 @@ export default function AddFrame({ openModalAddFrame, handleCloseModalAddFrames,
                                 <TextField
                                     name="name"
                                     label="Nome do quadro"
-                                    value="Nome do Quadro"
-                                    //onChange={(e) => setPlaceName(e.target.value)}
-                                    variant="outlined"
+                                    value={addFrame.name}
+                                    onChange={(e: any) => setAddFrame(e.target.value)}
                                     fullWidth
                                 />
                             </Grid>
@@ -60,23 +86,19 @@ export default function AddFrame({ openModalAddFrame, handleCloseModalAddFrames,
                                 <TextField
                                     name="situacao"
                                     label="Situação"
-                                    value="Situação"
-                                    //onChange={(e) => setPlaceAddress(e.target.value)}
-                                    variant="outlined"
+                                    value={addFrame.situacao}
+                                    onChange={(e: any) => setAddFrame(e.target.value)}
                                     fullWidth
                                 />
                             </Grid>
                             <Grid item style={{ textAlign: "center" }} xs={12}>
                                 <Button
-                                    onClick={() => handleCloseModalAddFrames}
+                                    onClick={() => postFrame}
                                     style={{ margin: "8px", backgroundColor: "#1769aa", width: 120 }}
                                 >
                                     Salvar
                                     {loading && <CircularProgress size={14} color="inherit" />}
                                 </Button>
-                                {/* <Button onClick={() => handleEditSubmitPlace(EditingPlace)} style={{margin: '8px'}} >
-                  Salvar e Aprovar
-                </Button> */}
                                 <Button
                                     onClick={handleCloseModalAddFrames}
                                     style={{ margin: "8px", backgroundColor: "#4dabf5", width: 120 }}
