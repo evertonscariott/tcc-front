@@ -1,0 +1,19 @@
+{
+    "frames": [
+        {
+            "nome": "Sprint 1",
+            "situação": "Concluída",
+            "id_projeto": 1
+        },
+        {
+            "nome": "Sprint 2",
+            "situação": "Em desenvolvimento",
+            "id_projeto": 2
+        },
+        {
+            "nome": "Sprint 3",
+            "situação": "Planejada",
+            "id_projeto": 2
+        }
+    ]
+}

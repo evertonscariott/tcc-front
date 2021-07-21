@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Card, CardActions, CardContent, Button, Typography } from "@material-ui/core";
 
@@ -21,136 +21,45 @@ const useStyles = makeStyles({
 
 export default function CardProjeto() {
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
+
+    const [frames, setFrames] = useState([
+        {
+            nome: "Sprint 1",
+            situacao: "Concluída",
+            id_projeto: 1,
+        },
+        {
+            nome: "Sprint 2",
+            situacao: "Em desenvolvimento",
+            id_projeto: 2,
+        },
+        {
+            nome: "Sprint 3",
+            situacao: "Planejada",
+            id_projeto: 2,
+        },
+    ]);
 
     return (
         <Grid container spacing={5} style={{ margin: 15 }}>
-            <Card className={classes.root} variant="outlined" style={{ padding: 10 }}>
-                <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        Word of the Day
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                        be{bull}nev{bull}o{bull}lent
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        adjective
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-            </Card>
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        Word of the Day
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                        be{bull}nev{bull}o{bull}lent
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        adjective
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-            </Card>
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        Word of the Day
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                        be{bull}nev{bull}o{bull}lent
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        adjective
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-            </Card>
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        Word of the Day
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                        be{bull}nev{bull}o{bull}lent
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        adjective
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-            </Card>
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        Word of the Day
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                        be{bull}nev{bull}o{bull}lent
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        adjective
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-            </Card>
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        Word of the Day
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                        be{bull}nev{bull}o{bull}lent
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        adjective
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-            </Card>
+            {frames.map((frameCard) => (
+                <Card className={classes.root} variant="outlined" style={{ padding: 10 }}>
+                    <CardContent key={frameCard.id_projeto}>
+                        <Typography className={classes.title} color="textSecondary" gutterBottom>
+                            {frameCard.nome}
+                        </Typography>
+                        <Typography variant="h5" component="h2"></Typography>
+                        <Typography className={classes.pos} color="textSecondary">
+                            {frameCard.situacao}
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button size="small" style={{ backgroundColor: "#1769aa", color: "#FFF" }}>
+                            Abrir Projeto
+                        </Button>
+                    </CardActions>
+                </Card>
+            ))}
         </Grid>
     );
 }

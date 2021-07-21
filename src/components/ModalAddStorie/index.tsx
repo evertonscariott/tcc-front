@@ -7,12 +7,10 @@ import Modal from "@material-ui/core/Modal";
 
 import Swal from "sweetalert2";
 
-import api from "../../services/api/api.config";
+import api from "../../services/api";
 
 import StorieDto from "../../infrastructure/dtos/storie.dto";
 import { Button, CircularProgress, Grid, Paper, TextField } from "@material-ui/core";
-import { add } from "date-fns";
-import { postFrame } from "../../services/api/resource/frame";
 
 type props = {
     openModalAddStorie: boolean;
@@ -53,6 +51,8 @@ export default function AddFrame({ openModalAddStorie, handleCloseModalAddStorie
     });
 
     const postStorie = async () => {
+        setLoading(true);
+        handleCloseModalAddStorie();
         try {
             const params = {
                 name: addStorie.name,
@@ -64,12 +64,14 @@ export default function AddFrame({ openModalAddStorie, handleCloseModalAddStorie
             const { data } = await api.post(`/api/v1/historia`, { params });
 
             console.log(data);
+            setLoading(false);
         } catch (error) {
             Swal.fire({
                 icon: "error",
                 title: "Erro!",
                 text: "Erro ao salvar história.",
             });
+            setLoading(false);
         }
     };
 

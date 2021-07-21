@@ -1,0 +1,31 @@
+{
+    "tarefas": [
+        {
+            "nome": "Task 1",
+            "descricao": "Primeira Task do Projeto",
+            "tempoEstimado": "14 horas",
+            "tempoRealizado": "13 horas",
+            "tipoTarefaId": 1,
+            "listaId": 1,
+            "historiaId": 1
+        },
+        {
+            "nome": "Task 2",
+            "descricao": "Segunda Task do Projeto",
+            "tempoEstimado": "14 horas",
+            "tempoRealizado": "13 horas",
+            "tipoTarefaId": 1,
+            "listaId": 1,
+            "historiaId": 1
+        },
+        {
+            "nome": "Task 3",
+            "descricao": "Terceira Task do Projeto",
+            "tempoEstimado": "14 horas",
+            "tempoRealizado": "13 horas",
+            "tipoTarefaId": 1,
+            "listaId": 1,
+            "historiaId": 1
+        }
+    ]
+}

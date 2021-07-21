@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, TextField, Paper, Button } from "@material-ui/core/";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
@@ -20,10 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Dashboard() {
     const classes = useStyles();
+
     return (
         <>
             <Menu />
-            <Grid container spacing={4} style={{ padding: 15, display: "flex", alignItems: "center" }}>
+            <Grid container spacing={4} style={{ padding: 15, display: "flex", alignItems: "center", marginTop: 50 }}>
                 <Grid item xs={12}>
                     <Paper
                         className={classes.paper}
@@ -38,9 +39,9 @@ export default function Dashboard() {
                         <Button
                             variant="contained"
                             color="primary"
-                            style={{ marginLeft: 15, marginTop: 8, width: "10%", height: 40 }}
+                            style={{ marginLeft: 15, marginTop: 8, width: "15%", height: 40 }}
                         >
-                            Primary
+                            Pesquisar
                         </Button>
                     </Paper>
                     <CardProjeto />

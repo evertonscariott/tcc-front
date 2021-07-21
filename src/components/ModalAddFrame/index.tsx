@@ -4,7 +4,7 @@ import Modal from "@material-ui/core/Modal";
 
 import Swal from "sweetalert2";
 
-import api from "../../services/api/api.config";
+import api from "../../services/api";
 
 import FrameDto from "../../infrastructure/dtos/frame.dto";
 import { Button, CircularProgress, Grid, Paper, TextField } from "@material-ui/core";
@@ -42,22 +42,26 @@ export default function AddFrame({ openModalAddFrame, handleCloseModalAddFrames,
         situacao: "",
     });
 
-    const postFrame = async () => {
+    const handlePostFrame = async (frame: FrameDto) => {
+        setLoading(true);
+        handleCloseModalAddFrames();
         try {
             const params = {
-                name: addFrame.name,
-                situacao: addFrame.situacao,
+                name: frame.name,
+                situacao: frame.situacao,
             };
 
-            const { data } = await api.post(`/api/v1/quadro`, { params });
+            await api.post(`/api/v1/quadro`, { params });
 
-            console.log(data);
+            console.log("Params", params);
+            setLoading(false);
         } catch (error) {
             Swal.fire({
                 icon: "error",
                 title: "Erro!",
                 text: "Erro ao salvar quadro.",
             });
+            setLoading(false);
         }
     };
 
@@ -93,7 +97,7 @@ export default function AddFrame({ openModalAddFrame, handleCloseModalAddFrames,
                             </Grid>
                             <Grid item style={{ textAlign: "center" }} xs={12}>
                                 <Button
-                                    onClick={() => postFrame}
+                                    onClick={() => handlePostFrame(addFrame)}
                                     style={{ margin: "8px", backgroundColor: "#1769aa", width: 120 }}
                                 >
                                     Salvar

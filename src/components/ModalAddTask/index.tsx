@@ -4,11 +4,10 @@ import Modal from "@material-ui/core/Modal";
 
 import Swal from "sweetalert2";
 
-import api from "../../services/api/api.config";
+import api from "../../services/api";
 
 import TaskDto from "../../infrastructure/dtos/task.dto";
 import { Button, CircularProgress, Grid, Paper, TextField } from "@material-ui/core";
-import { postFrame } from "../../services/api/resource/frame";
 
 type props = {
     openModalAddTask: boolean;
@@ -47,6 +46,8 @@ export default function AddFrame({ openModalAddTask, handleCloseModalAddTask, Ad
     });
 
     const postTask = async () => {
+        setLoading(true);
+        handleCloseModalAddTask();
         try {
             const params = {
                 name: addTask.name,
@@ -58,12 +59,14 @@ export default function AddFrame({ openModalAddTask, handleCloseModalAddTask, Ad
             const { data } = await api.post(`/api/v1/tarefa`, { params });
 
             console.log(data);
+            setLoading(false);
         } catch (error) {
             Swal.fire({
                 icon: "error",
                 title: "Erro!",
                 text: "Erro ao salvar tarefa.",
             });
+            setLoading(false);
         }
     };
 
@@ -133,15 +136,12 @@ export default function AddFrame({ openModalAddTask, handleCloseModalAddTask, Ad
                             </Grid>
                             <Grid item style={{ textAlign: "center" }} xs={12}>
                                 <Button
-                                    onClick={() => postFrame}
+                                    onClick={() => postTask}
                                     style={{ margin: "8px", backgroundColor: "#1769aa", width: 120 }}
                                 >
                                     Salvar
                                     {loading && <CircularProgress size={14} color="inherit" />}
                                 </Button>
-                                {/* <Button onClick={() => handleEditSubmitPlace(EditingPlace)} style={{margin: '8px'}} >
-                  Salvar e Aprovar
-                </Button> */}
                                 <Button
                                     onClick={handleCloseModalAddTask}
                                     style={{ margin: "8px", backgroundColor: "#4dabf5", width: 120 }}
