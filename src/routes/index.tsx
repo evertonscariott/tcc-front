@@ -8,7 +8,7 @@ export default function Routes() {
     return (
         <Router>
             <Switch>
-                <Route path="/" exact component={Dashboard} />
+                <Route exact path="/" component={Dashboard} />
                 <Route path="/quadro" component={SprintFrames} />
             </Switch>
         </Router>
