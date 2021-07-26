@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Card, CardActions, CardContent, Button, Typography } from "@material-ui/core";
 
+import ReactDOM from "react-dom";
+import { Link, Redirect } from "react-router-dom";
+
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
@@ -55,7 +58,7 @@ export default function CardProjeto() {
                     </CardContent>
                     <CardActions>
                         <Button size="small" style={{ backgroundColor: "#1769aa", color: "#FFF" }}>
-                            Abrir Projeto
+                            <Link to="/quadro">Abrir Projeto</Link>
                         </Button>
                     </CardActions>
                 </Card>
